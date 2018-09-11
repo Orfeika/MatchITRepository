@@ -12,6 +12,7 @@ public class MainTemp {
 		System.out.println("Högsta dygnsemperatur: " + ArrayStatistics.max(temp));
 		System.out.println("Datum för första dygnstemperatur under 0 grader: " + 
 				(ArrayStatistics.indexfirstNegative(temp) + 1));
+		System.out.println(ArrayStatistics.avg(new double [] {1}));
 	}
 	
 }
