@@ -19,10 +19,17 @@ public class Mole {
 			System.out.println("x" + x + "y" + y);
 			gp.block(x, y, Colors.MOLE);
 			char key = gp.waitForKey();
-			gp.block(x, y, Colors.TUNNEL);
+			if(y<gp.getHeight() / 3) {
+				Color c = y<gp.getHeight()/4?Colors.SKY:Colors.GRASS;
+				gp.block(x, y, c);
+
+			}else {
+				gp.block(x, y, Colors.TUNNEL);
+	
+			}
 
 			if (key == 'w') {
-				y = y < gp.getHeight() / 3 ? y + 1 : y - 1;
+				y = y <gp.getHeight() / 4 ? y + 1 : y - 1;
 
 			} else if (key == 'a') {
 				x = x < 0 ? x + 1 : x - 1;
@@ -30,7 +37,7 @@ public class Mole {
 			} else if (key == 'd') {
 				x = x > gp.getWidth() ? x - 1 : x + 1;
 			} else if (key == 's') {
-				y = y > gp.getHeight() ? y - 1 : y + 1;
+				y = y >= gp.getHeight() ? y - 1 : y + 1;
 
 			}
 
@@ -47,7 +54,7 @@ public class Mole {
 
 	public static void main(String[] args) {
 		System.out.println("Keep on digging!");
-		Graphics g = new Graphics(200, 150, 5);
+		Graphics g = new Graphics(70, 70, 10);
 		g.waitForKey();
 		Mole m = new Mole(g);
 		m.drawTheMoleWorld();
