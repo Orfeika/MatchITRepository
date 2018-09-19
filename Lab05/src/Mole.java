@@ -1,33 +1,58 @@
 import java.awt.Color;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.BlockAction;
+
 import se.lth.cs.pt.window.SimpleWindow;
 
 public class Mole {
-	private Graphics gp; 
-	
+	private Graphics gp;
+
 	public Mole(Graphics gp) {
 		this.gp = gp;
 	}
-	
-	
-	public void drawTheMoleWorld() {
-		
-		for (int i =1 ; i<10; i++) {
-			gp.rectangle(10*i, 10*i, gp.getWidth()-20*i, 5, Colors.SOIL);
-			gp.rectangle(10*i, 10*i,5,  gp.getHeight()-20*i-5, Colors.SOIL);
-			gp.rectangle(gp.getWidth()-10*i+5, 10*i,5,  gp.getHeight()-20*i+5, Colors.SOIL);
-			gp.rectangle(10*i, gp.getHeight()-10*i, gp.getWidth()-20*i+5, 5, Colors.SOIL);
+
+	public void dig() {
+		int x = gp.getWidth() / 3; // För att börja på mitten
+		int y = gp.getHeight() / 3;
+
+		while (true) {
+			System.out.println("x" + x + "y" + y);
+			gp.block(x, y, Colors.MOLE);
+			char key = gp.waitForKey();
+			gp.block(x, y, Colors.TUNNEL);
+
+			if (key == 'w') {
+				y = y < gp.getHeight() / 3 ? y + 1 : y - 1;
+
+			} else if (key == 'a') {
+				x = x < 0 ? x + 1 : x - 1;
+
+			} else if (key == 'd') {
+				x = x > gp.getWidth() ? x - 1 : x + 1;
+			} else if (key == 's') {
+				y = y > gp.getHeight() ? y - 1 : y + 1;
+
+			}
+
 		}
-			
-		
+
+	}
+
+	public void drawTheMoleWorld() {
+		gp.rectangle(0, 0, gp.getWidth(), gp.getHeight() / 4, Colors.SKY);
+		gp.rectangle(0, gp.getHeight() / 4, gp.getWidth(), gp.getHeight() / 3, Colors.GRASS);
+		gp.rectangle(0, gp.getHeight() / 3, gp.getWidth(), gp.getHeight(), Colors.SOIL);
+
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Keep on digging!"); 
-		Graphics g = new Graphics(200,150,5);
-		Mole m = new Mole (g);
+		System.out.println("Keep on digging!");
+		Graphics g = new Graphics(200, 150, 5);
+		g.waitForKey();
+		Mole m = new Mole(g);
 		m.drawTheMoleWorld();
-		
+		m.dig();
+
 	}
 
 }

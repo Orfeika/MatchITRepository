@@ -57,5 +57,9 @@ public class Graphics {
 			}
 			}
 	}
+	
+	public char waitForKey() {
+		return w.waitForKey();
+		}
 
 }
