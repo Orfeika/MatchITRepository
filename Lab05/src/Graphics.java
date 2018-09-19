@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import se.lth.cs.pt.window.SimpleWindow;
 
 public class Graphics {
@@ -17,6 +19,17 @@ public class Graphics {
 		w = new SimpleWindow(300, 500, "Digging");
 	}
 
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+	public SimpleWindow getW() {
+		return w;
+	}
+
 	public void square() {
 		w.moveTo(10, 10);
 		w.lineTo(10, 20);
@@ -25,15 +38,24 @@ public class Graphics {
 		w.lineTo(10, 10);
 	}
 
-	public void block(int x , int y) {
+	public void block(int x, int y, Color color) {
+		w.setLineColor(color);
 		int left = x * blockSize;
 		int right = left + blockSize - 1;
 		int top = y * blockSize;
 		int bottom = top + blockSize - 1;
-		for(int row = top; row <= bottom; row ++){
-		w.moveTo(left, row);
-		w.lineTo(right, row);
+		for (int row = top; row <= bottom; row++) {
+			w.moveTo(left, row);
+			w.lineTo(right, row);
 		}
 	}
 	
+	public void rectangle(int x, int y, int width, int height, Color c ) {
+		for (int yy = y; yy < y + height; yy++){
+			for(int xx = x; xx < x + width; xx++){
+			block(xx, yy, c);
+			}
+			}
+	}
+
 }
