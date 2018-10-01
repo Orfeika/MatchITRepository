@@ -1,4 +1,3 @@
-import se.lth.cs.pt.square.Square;
 import se.lth.cs.pt.window.SimpleWindow;
 
 public class DrawClickSquare {
@@ -11,6 +10,7 @@ public class DrawClickSquare {
 		sq.draw(w);
 	}
 
+	
 	public static void drawRowOfSquares(int x, int y, Square sq, SimpleWindow w) {
 
 		int oldX = sq.getX();

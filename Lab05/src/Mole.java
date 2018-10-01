@@ -32,10 +32,10 @@ public class Mole {
 				y = y <gp.getHeight() / 4 ? y + 1 : y - 1;
 
 			} else if (key == 'a') {
-				x = x < 0 ? x + 1 : x - 1;
+				x = x <= 0 ? x + 1 : x - 1;
 
 			} else if (key == 'd') {
-				x = x > gp.getWidth() ? x - 1 : x + 1;
+				x = x >= gp.getWidth() ? x - 1 : x + 1;
 			} else if (key == 's') {
 				y = y >= gp.getHeight() ? y - 1 : y + 1;
 

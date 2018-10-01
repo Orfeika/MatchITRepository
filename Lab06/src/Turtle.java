@@ -1,12 +1,13 @@
+import java.awt.Color;
+
 import se.lth.cs.pt.window.SimpleWindow;
 
 public class Turtle {
 	private int beta;
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private SimpleWindow w;
-	private boolean penStatus ;
-
+	private boolean penStatus;
 	/**
 	 * Skapar en sköldpadda som ritar i ritfönstret w. Från början befinner sig
 	 * sköldpaddan i punkten x, y med pennan lyft och huvudet pekande rakt uppåt i
@@ -17,7 +18,7 @@ public class Turtle {
 		this.x = x;
 		this.y = y;
 		this.w = w;
-		this.penStatus = true; 
+		this.penStatus = true;
 		w.moveTo(x, y);
 
 	}
@@ -35,25 +36,21 @@ public class Turtle {
 
 	/** Går rakt framåt n pixlar i den riktning huvudet pekar. */
 	public void forward(int n) {
-		double radianBeta = beta * Math.PI / 180;
-		int newX =(int)Math.round( 10*(x + n * Math.cos(radianBeta)));
-		System.out.println("x0: " + x + " \nx1:" + newX );
-		int newY = (int)Math.round( 10*(y - n * Math.sin(radianBeta)));
-		System.out.println("y0: " + y + " \ny1:" + newY);
+		w.moveTo((int)x, (int)y);
+		x = x + n * Math.cos(Math.toRadians(beta));
+		y = y - n * Math.sin(Math.toRadians(beta));
+		System.out.println("xold: " + x + " yold " + y + " x " + x + " y " + y + " beta " + beta);
 		if (penStatus == true) {
-			w.moveTo(x, y);
-			w.moveTo(newX,newY);
+			w.moveTo((int)x, (int)y);
 		} else {
-			w.moveTo(x, y);
-			w.lineTo(newX,newY);
+			w.lineTo((int)x, (int)y);
 		}
-		x = newX;
-		y = newY;
 
 	}
 
 	/** Vrider beta grader åt vänster runt pennan. */
 	public void left(int beta) {
+
 		this.beta += beta;
 
 	}
@@ -72,19 +69,27 @@ public class Turtle {
 	public void turnNorth() {
 		this.beta = 90;
 	}
+	
+	public void setColor(Color color) {
+		w.setLineColor(color);
+	}
+
+
 
 	/** Tar reda på x-koordinaten för sköldpaddans aktuella position. */
 	public int getX() {
-		return this.x;
+		return (int) this.x;
 	}
 
 	/** Tar reda på y-koordinaten för sköldpaddans aktuella position. */
 	public int getY() {
-		return this.y;
+		return (int) this.y;
 	}
 
 	/** Tar reda på sköldpaddans riktning, i grader från den positiva X-axeln. */
 	public int getDirection() {
 		return beta;
 	}
+	
+	
 }
