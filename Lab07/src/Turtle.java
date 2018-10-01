@@ -39,11 +39,14 @@ public class Turtle {
 		w.moveTo((int)x, (int)y);
 		x = x + n * Math.cos(Math.toRadians(beta));
 		y = y - n * Math.sin(Math.toRadians(beta));
-		System.out.println("xold: " + x + " yold " + y + " x " + x + " y " + y + " beta " + beta);
+		System.out.println("xold: " + x + " yold " + y);
 		if (penStatus == true) {
 			w.moveTo((int)x, (int)y);
+			w.delay(0);
 		} else {
 			w.lineTo((int)x, (int)y);
+			w.delay(0);
+
 		}
 
 	}
