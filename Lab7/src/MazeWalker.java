@@ -31,7 +31,7 @@ public class MazeWalker {
 
 			} else {
 				turtle.left(90);
-				turtle.forward(stepLenght);
+				turtle.forward(stepLenght+3);
 				directionChanged++;
 
 			}

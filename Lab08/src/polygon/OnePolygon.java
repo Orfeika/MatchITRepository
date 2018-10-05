@@ -26,6 +26,8 @@ public class OnePolygon {
 			int y = scan.nextInt();
 			pol.addVertex(x, y);
 		}
+		 pol.setPolygonCoordinates( Arrays.copyOfRange
+					(pol.getPolygonCoordinates(),0,pol.getVertexCounter()));
 		SimpleWindow w = new SimpleWindow(600, 600, "A polygon");
 		pol.draw(w);
 	}

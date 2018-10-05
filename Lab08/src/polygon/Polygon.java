@@ -15,35 +15,12 @@ public class Polygon {
 
 	public Polygon(int vertexNumber) {
 		polygonCoordinates = new Point[vertexNumber];
-		for (int i = 0; i < polygonCoordinates.length; i++) {
-			polygonCoordinates[i] = new Point(0, 0);
-
-		}
 	}
 
 	public Polygon() {
-		this(14);
+		this(10);
 	}
 	
-	
-
-	public Point[] getPolygonCoordinates() {
-		return polygonCoordinates;
-	}
-
-	public void setPolygonCoordinates(Point[] polygonCoordinates) {
-		this.polygonCoordinates = polygonCoordinates;
-	}
-	
-
-	public int getVertexCounter() {
-		return vertexCounter;
-	}
-
-	public void setVertexCounter(int vertexCounter) {
-		this.vertexCounter = vertexCounter;
-	}
-
 	public void addVertex(int x, int y) {
 		Point vertexPoint = new Point(x, y);
 		polygonCoordinates[vertexCounter] = vertexPoint;
@@ -52,7 +29,7 @@ public class Polygon {
 
 	public void draw(SimpleWindow w) {
 		w.moveTo(polygonCoordinates[0].getX(), polygonCoordinates[0].getY());
-		for (int i = 1; i < polygonCoordinates.length; i++) {
+		for (int i = 1; i < vertexCounter; i++) {
 			w.lineTo(polygonCoordinates[i].getX(), polygonCoordinates[i].getY());
 		}
 		w.lineTo(polygonCoordinates[0].getX(), polygonCoordinates[0].getY());
