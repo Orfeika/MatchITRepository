@@ -14,14 +14,42 @@ public class MemoryGame {
 			}
 		}
 		while(!mb.hasWon()) {
-			mw.waitForMouseClick();
-			int row = mw.getMouseCol();
-			int col  = mw.getMouseCol();
-			mb.turnCard(row, col);
-			mw.drawCard(row, col);
 			
+			mw.waitForMouseClick();
+			int rowCardOne = mw.getMouseRow();
+			int colCardOne  = mw.getMouseCol();
+			while(mb.frontUp(rowCardOne, colCardOne)) {
+				mw.waitForMouseClick();
+				rowCardOne = mw.getMouseRow();
+				colCardOne  = mw.getMouseCol();
+			}
+			mb.turnCard(rowCardOne, colCardOne);
+			mw.drawCard(rowCardOne, colCardOne);
+			mw.waitForMouseClick();
+			int rowCardTwo = mw.getMouseRow();
+			int colCardTwo  = mw.getMouseCol();
+			while(mb.frontUp(rowCardTwo, colCardTwo)) {
+				mw.waitForMouseClick();
+				rowCardTwo = mw.getMouseRow();
+				colCardTwo  = mw.getMouseCol();
+			}
+			mb.turnCard(rowCardTwo, colCardTwo);
+			mw.drawCard(rowCardTwo, colCardTwo);
+
+
+			if(!(mb.getCard(rowCardOne, colCardOne) 
+					== mb.getCard(rowCardTwo, colCardTwo))){
+				mb.turnCard(rowCardOne, colCardOne);
+				mb.turnCard(rowCardTwo, colCardTwo);
+				mw.waitForMouseClick();
+				mw.drawCard(rowCardOne, colCardOne);
+				mw.drawCard(rowCardTwo, colCardTwo);
+				
+			}
+
+
 
 		}
-
+		mw.close();
 	}
 }

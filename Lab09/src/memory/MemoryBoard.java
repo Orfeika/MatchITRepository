@@ -9,7 +9,7 @@ public class MemoryBoard {
 	private int size;
 	private String backFileName;
 	private String[] frontFileNames;
-	private boolean [][]booleanCardsOnTheboard;
+	private boolean[][] booleanCardsOnTheboard;
 
 	/**
 	 * Skapar ett memorybräde med size * size kort. backFileName är filnamnet för
@@ -22,7 +22,7 @@ public class MemoryBoard {
 		this.backFileName = backFileName;
 		this.frontFileNames = frontFileNames;
 		memoryCardsOnTheBoard = new MemoryCardImage[size][size];
-		booleanCardsOnTheboard =new boolean [size][size];
+		booleanCardsOnTheboard = new boolean[size][size];
 		MemoryCardImage[] mcList = this.createCards(backFileName, frontFileNames);
 
 		for (int i = 0; i < size; i++) {
@@ -30,8 +30,8 @@ public class MemoryBoard {
 			int end = size * i + size;
 			memoryCardsOnTheBoard[i] = Arrays.copyOfRange(mcList, start, end);
 		}
-		for(int i = 0 ; i<size; i++) {
-			for(int j = 0 ; j<size; j++) {
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
 				booleanCardsOnTheboard[i][j] = false;
 			}
 		}
@@ -53,8 +53,6 @@ public class MemoryBoard {
 		shuffleArray(memoryCards);
 		return memoryCards;
 	}
-	
-	
 
 	/** Tar reda på brädets storlek. */
 	public int getSize() {
@@ -71,7 +69,7 @@ public class MemoryBoard {
 
 	/** Vänder kortet på rad r, kolonn c. */
 	public void turnCard(int r, int c) {
-		booleanCardsOnTheboard[r][c] = true;
+		booleanCardsOnTheboard[r][c] = !booleanCardsOnTheboard[r][c];
 
 	}
 
@@ -95,7 +93,14 @@ public class MemoryBoard {
 	/** Returnerar true om alla kort har framsidan upp. */
 	public boolean hasWon() {
 
-		return false;
+		for (int i = 0; i < booleanCardsOnTheboard.length; i++) {
+			for (int j = 0; j < booleanCardsOnTheboard[i].length; j++) {
+				if (!booleanCardsOnTheboard[i][j]) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	static void shuffleArray(MemoryCardImage[] ar) {
