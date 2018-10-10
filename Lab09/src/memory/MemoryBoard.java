@@ -7,8 +7,6 @@ public class MemoryBoard {
 	private MemoryCardImage memoryCardsOnTheBoard[][];
 	private MemoryCardImage memoryCards[];
 	private int size;
-	private String backFileName;
-	private String[] frontFileNames;
 	private boolean[][] booleanCardsOnTheboard;
 
 	/**
@@ -19,8 +17,6 @@ public class MemoryBoard {
 
 	public MemoryBoard(int size, String backFileName, String[] frontFileNames) {
 		this.size = size;
-		this.backFileName = backFileName;
-		this.frontFileNames = frontFileNames;
 		memoryCardsOnTheBoard = new MemoryCardImage[size][size];
 		booleanCardsOnTheboard = new boolean[size][size];
 		MemoryCardImage[] mcList = this.createCards(backFileName, frontFileNames);
