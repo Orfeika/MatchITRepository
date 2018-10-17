@@ -3,9 +3,10 @@ package cards;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 
 public class Deck {
-	ArrayList<Card> cardsInDeck ; 
+	private ArrayList<Card> cardsInDeck ; 
 	
 	/** Skapar en blandad kortlek med 52 kort. */
 	public Deck() {
@@ -22,7 +23,8 @@ public class Deck {
 	/** Drar det översta kortet i kortleken. */
 	public Card getCard() {
 
-		return cardsInDeck.remove(cardsInDeck.size()-1);
+		return cardsInDeck.remove(0);
+		//cardsInDeck.size()-1
 	}
 	
 	/** Undersöker om det finns fler kort i kortleken. */
@@ -33,6 +35,10 @@ public class Deck {
 	@Override
 	public String toString() {
 		return "Deck [cardsInDeck=" + cardsInDeck + "]";
+	}
+
+	public ArrayList<Card> getCardsInDeck() {
+		return cardsInDeck;
 	}
 	
 	

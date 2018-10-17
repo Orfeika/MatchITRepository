@@ -12,7 +12,7 @@ public class Hand {
 	 * Skapar ett objekt som kan hålla reda på en spelares kort på hand. Från början
 	 * är handen tom.
 	 */
-	Hand() {
+	public Hand() {
 		hand = new ArrayList<>();
 	}
 

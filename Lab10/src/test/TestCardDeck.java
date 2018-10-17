@@ -15,6 +15,7 @@ public class TestCardDeck {
 		int[] rankVect = new int[13];  // nbr ones, twos etc
 		while (deck.moreCards()) {
 			Card c = deck.getCard();
+			System.out.println(suitVect[c.getSuit()]);
 			suitVect[c.getSuit()]++; 
 			rankVect[c.getRank()-1]++;
 			list.add(c);

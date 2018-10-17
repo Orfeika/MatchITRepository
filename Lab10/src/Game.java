@@ -22,22 +22,11 @@ public class Game {
 		// TODO Auto-generated method stub
 		int winsCounter = 0;
 		Deck deck = new Deck();
-		ArrayList<Card> list = new ArrayList<Card>();
-		int[] suitVect = new int[4]; // Nbr clubs, diamonds etc
-		int[] rankVect = new int[13]; // nbr ones, twos etc
-
-		while (deck.moreCards()) {
-
-			Card c = deck.getCard();
-			suitVect[c.getSuit()]++;
-			rankVect[c.getRank() - 1]++;
-
-			list.add(c);
-		}
-
+		
 		CardWindow w = new CardWindow(1, 1, "Card deck");
 		int j = 1;
-		for (int i = 0; i < list.size(); i++) {
+		ArrayList<Card> list = deck.getCardsInDeck();
+		for (int i = 0; i <list.size() ; i++) {
 			w.displayCard(list.get(i), 0, 0);
 			j = j <= 3 ? j : 1;
 			w.displayText(String.valueOf(j));

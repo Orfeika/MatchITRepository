@@ -1,0 +1,3 @@
+SELECT förnamn , efternamn
+FROM tblPersoner
+WHERE personnummer = '651212'

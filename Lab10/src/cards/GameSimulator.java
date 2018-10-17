@@ -3,7 +3,7 @@ package cards;
 import java.util.ArrayList;
 
 public class GameSimulator {
-	private static final int NBR_ITERATIONS = 10000;
+	private static final int NBR_ITERATIONS = 1000000;
 	private static boolean isCardSameAsCounter(Card card, int counter) {
 		if (card.getRank() == counter) {
 
@@ -22,18 +22,7 @@ public class GameSimulator {
 		for (int k = 0; k <= NBR_ITERATIONS; k++) {
 
 			Deck deck = new Deck();
-			ArrayList<Card> list = new ArrayList<Card>();
-			int[] suitVect = new int[4]; // Nbr clubs, diamonds etc
-			int[] rankVect = new int[13]; // nbr ones, twos etc
-			while (deck.moreCards()) {
-
-				Card c = deck.getCard();
-				suitVect[c.getSuit()]++;
-				rankVect[c.getRank() - 1]++;
-
-				list.add(c);
-			}
-
+			ArrayList<Card> list = deck.getCardsInDeck();
 			// CardWindow w = new CardWindow(1, 1, "Card deck");
 			int j = 1;
 			for (int i = 0; i < list.size(); i++) {
