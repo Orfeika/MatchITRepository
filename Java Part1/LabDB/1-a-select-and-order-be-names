@@ -1,0 +1,3 @@
+SELECT förnamn , efternamn
+FROM tblPersoner
+ORDER BY  efternamn, förnamn

@@ -1,0 +1,37 @@
+package textproc;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class GeneralWordCounter implements TextProcessor {
+	private Set<String> stopwords;
+	private Map<String, Integer> wordCounter;
+
+	public GeneralWordCounter(Set<String> stopwords) {
+		this.stopwords = stopwords;
+		wordCounter = new HashMap();
+	}
+
+	@Override
+	public void process(String w) {
+		if (!stopwords.contains(w)) {
+			int value = 0;
+			value = wordCounter.containsKey(w) ? value++ : 1;
+			wordCounter.put(w, value);
+		}
+	}
+
+	@Override
+	public void report() {
+		for (String tp : wordCounter.keySet()) {
+			if (wordCounter.get(tp) >0) {
+				String value = wordCounter.get(tp).toString();
+				String key = tp.toString();
+				System.out.println(key + ": " + value);
+
+			}
+		}
+	}
+
+}

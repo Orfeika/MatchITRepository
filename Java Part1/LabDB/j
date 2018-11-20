@@ -1,0 +1,6 @@
+SELECT  kommun , trakt, block , enhet, 
+		taxeringsvärde 
+FROM tblFastigheter
+WHERE taxeringsvärde NOT BETWEEN 500000 AND  1000000 
+ORDER BY taxeringsvärde 
+

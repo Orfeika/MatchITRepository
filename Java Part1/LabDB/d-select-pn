@@ -1,0 +1,3 @@
+SELECT personnummer 
+FROM tblPersoner
+WHERE  förnamn = 'Maria' AND  efternamn = 'Svensson' AND kommun = 'Lund';

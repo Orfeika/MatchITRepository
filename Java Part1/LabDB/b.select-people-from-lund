@@ -1,0 +1,3 @@
+SELECT personnummer, förnamn , efternamn
+FROM tblPersoner
+WHERE kommun ='Lund';

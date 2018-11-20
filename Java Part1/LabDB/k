@@ -1,0 +1,4 @@
+SELECT  MIN (taxeringsvärde) AS Min  , 
+		MAX(taxeringsvärde) AS Max  
+FROM tblFastigheter
+
