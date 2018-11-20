@@ -1,5 +1,0 @@
-SELECT  COUNT (*) AS antal 
-FROM tblFastigheter
-WHERE kommun = 'Skoby'
-
-

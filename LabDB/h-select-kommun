@@ -1,4 +1,0 @@
-SELECT  kommun
-FROM tblFastigheter
-GROUP BY kommun;
-

@@ -1,4 +1,0 @@
-SELECT  kommun || " " || trakt || " " ||
-		block || ":" || enhet as fastghetbeteckning
-FROM tblFastigheter
-ORDER BY kommun, trakt, block, enhet;

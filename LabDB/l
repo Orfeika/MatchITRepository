@@ -1,4 +1,0 @@
-SELECT ROUND (AVG (taxeringsvärde ) , 2) || ' kr' as 'Genomsnittligt taxeringsvärde' 
-FROM tblFastigheter
-Where kommun = 'Övered'
-

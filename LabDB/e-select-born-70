@@ -1,3 +1,0 @@
-SELECT personnummer,  efternamn || " " || förnamn as namn, kommun 
-FROM tblPersoner
-WHERE    personnummer   LIKE '7%'  
