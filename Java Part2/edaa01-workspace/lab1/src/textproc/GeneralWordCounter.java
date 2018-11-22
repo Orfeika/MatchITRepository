@@ -1,17 +1,11 @@
 package textproc;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
-import com.sun.org.glassfish.external.statistics.CountStatistic;
 
 public class GeneralWordCounter implements TextProcessor {
 	private Set<String> stopwords;
@@ -19,7 +13,7 @@ public class GeneralWordCounter implements TextProcessor {
 
 	public GeneralWordCounter(Set<String> stopwords) {
 		this.stopwords = stopwords;
-		wordCounter = new TreeMap();
+		wordCounter = new TreeMap<>();
 	}
 
 	@Override
@@ -44,16 +38,16 @@ public class GeneralWordCounter implements TextProcessor {
 //		}
 		Set<Map.Entry<String, Integer>> wordSet = wordCounter.entrySet();
 		List<Map.Entry<String, Integer>> wordList = new ArrayList<>(wordSet);
-		wordList.sort(Collections.reverseOrder(new WordCountComparator()));
-
+		wordList.sort(Collections.reverseOrder(new WordCountValueComparator()));
+		
 		List<Map.Entry<String, Integer>> sortedList = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 15; i++) {
 			sortedList.add(wordList.get(i));
 		}
 
-		//sortedList.sort( new WordCountKeyComparator());
-
-		System.out.println(sortedList.toString());
+		for (Map.Entry<String, Integer> word : sortedList) {
+			System.out.println(word.getKey() + ": " + word.getValue());
+		}
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class WordCountComparator implements Comparator<Map.Entry<String, Integer>> {
+public class WordCountValueComparator implements Comparator<Map.Entry<String, Integer>> {
 
 	@Override
 	public int compare(Entry<String, Integer> o1, Entry<String, Integer>o2) { 
@@ -15,7 +15,7 @@ public class WordCountComparator implements Comparator<Map.Entry<String, Integer
 			return -1;
 		}else {
 		
-			return 0;
+			return o1.getKey().compareTo(o2.getKey());
 
 		}
 		

@@ -6,7 +6,6 @@ public class SingleWordCounter implements TextProcessor {
 
 	public SingleWordCounter(String word) {
 		this.word = word;
-		this.n = n;
 	}
 
 	public void process(String w) {

@@ -39,13 +39,14 @@ public class Holgersson {
 		Scanner s = new Scanner(new File("nilsholg.txt"));
 		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+"); // se handledning
 
+		pList.add(rMap);
+		pList.add(gwc);
+
 		while (s.hasNext()) {
 			String word = s.next().toLowerCase();
 			for (TextProcessor tp : pList) {
 				tp.process(word);
 			}
-			rMap.process(word);
-			gwc.process(word);
 		}
 
 		s.close();
@@ -54,8 +55,6 @@ public class Holgersson {
 			tp.report();
 		}
 		
-		rMap.report();
-		gwc.report();
 		long t1 = System.nanoTime();
 		System.out.println("Time: "+ (t1-t0)/1000000 + " ms");
 	}
