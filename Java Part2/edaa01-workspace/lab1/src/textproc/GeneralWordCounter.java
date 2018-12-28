@@ -11,6 +11,13 @@ public class GeneralWordCounter implements TextProcessor {
 	private Set<String> stopwords;
 	private Map<String, Integer> wordCounter;
 
+
+	
+
+	public Set<Map.Entry<String, Integer>> getWords() {
+		return wordCounter.entrySet();
+	}
+
 	public GeneralWordCounter(Set<String> stopwords) {
 		this.stopwords = stopwords;
 		wordCounter = new TreeMap<>();
@@ -28,18 +35,10 @@ public class GeneralWordCounter implements TextProcessor {
 
 	@Override
 	public void report() {
-//		for (String tp : wordCounter.keySet()) {
-//			if (wordCounter.get(tp) >= 200) {
-//				String value = wordCounter.get(tp).toString();
-//				String key = tp.toString();
-//				System.out.println(key + ": " + value);
-//
-//			}
-//		}
 		Set<Map.Entry<String, Integer>> wordSet = wordCounter.entrySet();
 		List<Map.Entry<String, Integer>> wordList = new ArrayList<>(wordSet);
 		wordList.sort(Collections.reverseOrder(new WordCountValueComparator()));
-		
+
 		List<Map.Entry<String, Integer>> sortedList = new ArrayList<>();
 		for (int i = 0; i < 15; i++) {
 			sortedList.add(wordList.get(i));

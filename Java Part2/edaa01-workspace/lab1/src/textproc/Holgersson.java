@@ -18,24 +18,22 @@ public class Holgersson {
 	public static void main(String[] args) throws FileNotFoundException {
 		long t0 = System.nanoTime();
 		TextProcessor p = new SingleWordCounter("nils");
-		
-		
+
 		TextProcessor p2 = new SingleWordCounter("norge");
 		List<TextProcessor> pList = new ArrayList();
 		pList.add(p);
 		pList.add(p2);
 		TextProcessor rMap = new MultiWordCounter(REGIONS);
-		
-		
+
 		Scanner scan = new Scanner(new File("undantagsord.txt"));
 		Set<String> stopwords = new HashSet<>();
-		while(scan.hasNext()) {
-			String exaceptionWord =scan.next().toLowerCase();
+		while (scan.hasNext()) {
+			String exaceptionWord = scan.next().toLowerCase();
 			stopwords.add(exaceptionWord);
 		}
 		scan.close();
 		GeneralWordCounter gwc = new GeneralWordCounter(stopwords);
-		
+
 		Scanner s = new Scanner(new File("nilsholg.txt"));
 		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+"); // se handledning
 
@@ -54,10 +52,9 @@ public class Holgersson {
 		for (TextProcessor tp : pList) {
 			tp.report();
 		}
-		
-		long t1 = System.nanoTime();
-		System.out.println("Time: "+ (t1-t0)/1000000 + " ms");
-	}
 
+		long t1 = System.nanoTime();
+		System.out.println("Time: " + (t1 - t0) / 1000000 + " ms");
+	}
 
 }

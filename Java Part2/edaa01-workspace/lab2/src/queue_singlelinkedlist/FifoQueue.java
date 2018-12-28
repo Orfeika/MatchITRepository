@@ -24,18 +24,14 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 		if (size == 0) {
 			last = new QueueNode<E>(e);
 			last.next = last;
-			size++;
-			return true;
-
 		} else {
 			QueueNode<E> pLast = last;
 			last = new QueueNode<E>(e);
 			last.next = pLast.next;
 			pLast.next = last;
-			size++;
-			return true;
-
 		}
+		size++;
+		return true;
 	}
 
 	/**
@@ -127,13 +123,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 
 		@Override
 		public boolean hasNext() {
-			if (pos != null) {
-				return true;
-
-			} else {
-				return false;
-
-			}
+			return pos !=  null;
 		}
 
 		@Override
