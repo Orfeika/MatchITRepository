@@ -33,23 +33,24 @@ public class Mountain extends Fractal {
 
 	@Override
 	public void draw(TurtleGraphics turtle) {
-		mountainTriangle(turtle,order, a, b, c);
+		mountainTriangle(turtle,order, b, c, a);
 	}
 	
 	
 	private void mountainTriangle(TurtleGraphics turtle,int order, Point a, Point b, Point c ) {
 		if(order == 0) {
-			turtle.moveTo(a.getX(),a.getY());
-			turtle.forwardTo(b.getX(), b.getY());
+			turtle.moveTo(b.getX(),b.getY());
 			turtle.forwardTo(c.getX(), c.getY());
-			turtle.forwardTo(a.getX(), a.getY());	
+			turtle.forwardTo(a.getX(), a.getY());
+			turtle.forwardTo(b.getX(), b.getY());	
 		}else {
 			Point mAB = middlePoint(a,b);
 			Point mBC = middlePoint(b,c);
 			Point mCA = middlePoint(c, a);
-			
-			mountainTriangle(turtle,order-1,mAB ,mBC,mCA);
-			//mountainTriangle(turtle, order-1, a, middlePoint(a, mAB), mAB, c);
+			mountainTriangle(turtle, order-1, mAB, b, mBC);
+			mountainTriangle(turtle, order-1, mAB, a, mCA);
+			mountainTriangle(turtle, order-1, mCA, mBC, mAB);
+			mountainTriangle(turtle, order-1, mCA, c, mBC);
 		
 		}
 	}
