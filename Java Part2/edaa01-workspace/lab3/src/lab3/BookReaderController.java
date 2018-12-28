@@ -81,12 +81,12 @@ public class BookReaderController extends Application {
 		frequency.setOnAction((e) -> words.sort(new WordCountValueComparator()));
 		TextField searchField = new TextField("");
 		Button find = new Button("Find");
-		// find and select word
 		// if word not found show an alert
 		Alert alert = new Alert(AlertType.WARNING,"The word is not found");
 		alert.setTitle("BookReader notification");
 		alert.setHeaderText("Search status:");
 
+		// find and select word
 		find.setOnAction((action) -> {
 			String input = searchField.getText();
 			Boolean isFound  = false;
