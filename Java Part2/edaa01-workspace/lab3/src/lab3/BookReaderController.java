@@ -8,12 +8,17 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -21,9 +26,12 @@ import textproc.GeneralWordCounter;
 import textproc.TextProcessor;
 import textproc.WordCountKeyComparator;
 import textproc.WordCountValueComparator;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 public class BookReaderController extends Application {
 
@@ -71,26 +79,55 @@ public class BookReaderController extends Application {
 		alphabetic.setOnAction((e) -> words.sort(new WordCountKeyComparator()));
 		Button frequency = new Button("Frequency");
 		frequency.setOnAction((e) -> words.sort(new WordCountValueComparator()));
-		TextField searchField = new TextField("Search");
+		TextField searchField = new TextField("");
 		Button find = new Button("Find");
+		// find and select word
+		// if word not found show an alert
+		Alert alert = new Alert(AlertType.WARNING,"The word is not found");
+		alert.setTitle("BookReader notification");
+		alert.setHeaderText("Search status:");
+
 		find.setOnAction((action) -> {
 			String input = searchField.getText();
+			Boolean isFound  = false;
 			for (Entry<String, Integer> word : words) {
 				if (word.getKey().equalsIgnoreCase(input)) {
 					listView.scrollTo(word);
+					listView.getSelectionModel().select(word);
+					isFound = true;
 				}
+				
 			}
+			if(!isFound) {
+				alert.showAndWait();
+			}
+			
+			
 		}
 
 		);
-		
+		// allow capital letters and remove spaces
+
+		searchField.setTextFormatter(new TextFormatter<String>((Change change) -> {
+			String newText = change.getControlNewText();
+			if (newText.matches(" ")) {
+				change.setText(change.getText().replace(" ", ""));
+				return change;
+			}
+			if (newText.matches("[A-Z]*")) {
+				change.setText(change.getText().toLowerCase());
+				return change;
+			}
+			return change;
+		}));
+
 		// press enter
-	    root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
-	        if (ev.getCode() == KeyCode.ENTER) {
-	           find.fire();
-	           ev.consume(); 
-	        }
-	    });
+		root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+			if (ev.getCode() == KeyCode.ENTER) {
+				find.fire();
+				ev.consume();
+			}
+		});
 		hbox.getChildren().addAll(alphabetic, frequency, searchField, find);
 		root.setBottom(hbox);
 
