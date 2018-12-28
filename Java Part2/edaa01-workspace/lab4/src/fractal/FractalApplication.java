@@ -26,6 +26,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import koch.Koch;
+import mountain.Mountain;
+import mountain.Point;
 
 public class FractalApplication extends Application {
 	private Fractal[] fractals;
@@ -35,8 +37,8 @@ public class FractalApplication extends Application {
 	private Task<Void> fractalDrawTask;
 	private Group canvasWrapper;
 
-	final double fractalWidth = 600;
-	final double fractalHeight = 600;
+	final double fractalWidth = 1000;
+	final double fractalHeight = 800;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -45,7 +47,8 @@ public class FractalApplication extends Application {
 	@Override
 	public void start(Stage stage) {
 		fractals = new Fractal[1];
-		fractals[0] = new Koch(300);	
+		//fractals[0] = new Koch(300);	
+		fractals[0] = new Mountain(new Point(100,300) , new Point(300, 100), new Point(500, 300));
 		actFractal = fractals[0];
 		BorderPane root = new BorderPane();
 		root.setBottom(addButtonBox());
