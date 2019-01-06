@@ -55,7 +55,7 @@ public class BookReaderController extends Application {
 		ArrayList<GeneralWordCounter> gWords = new ArrayList<>();
 		gWords.add(counter);
 		Scanner s = new Scanner(new File("nilsholg.txt"));
-		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+"); // se handledning
+		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+"); 
 
 		while (s.hasNext()) {
 			String word = s.next().toLowerCase();
@@ -82,44 +82,43 @@ public class BookReaderController extends Application {
 		TextField searchField = new TextField("");
 		Button find = new Button("Find");
 		// if word not found show an alert
-		Alert alert = new Alert(AlertType.WARNING,"The word is not found");
+		Alert alert = new Alert(AlertType.WARNING, "The word is not found");
 		alert.setTitle("BookReader notification");
 		alert.setHeaderText("Search status:");
 
 		// find and select word
 		find.setOnAction((action) -> {
 			String input = searchField.getText();
-			Boolean isFound  = false;
+			Boolean isFound = false;
 			for (Entry<String, Integer> word : words) {
 				if (word.getKey().equalsIgnoreCase(input)) {
 					listView.scrollTo(word);
 					listView.getSelectionModel().select(word);
 					isFound = true;
 				}
-				
+
 			}
-			if(!isFound) {
+			if (!isFound) {
 				alert.showAndWait();
 			}
-			
-			
+
 		}
 
 		);
 		// allow capital letters and remove spaces
 
-		searchField.setTextFormatter(new TextFormatter<String>((Change change) -> {
-			String newText = change.getControlNewText();
-			if (newText.matches(" ")) {
-				change.setText(change.getText().replace(" ", ""));
-				return change;
-			}
-			if (newText.matches("[A-Z]*")) {
-				change.setText(change.getText().toLowerCase());
-				return change;
+		TextFormatter<?> formatter = new TextFormatter<>((TextFormatter.Change change) -> {
+			String text = change.getText();
+			if (!text.isEmpty()) {
+				String newText = text.replace(" ", "").toLowerCase();
+				int carretPos = change.getCaretPosition() - text.length() + newText.length();
+				change.setText(newText);
+				change.selectRange(carretPos, carretPos);
 			}
 			return change;
-		}));
+		});
+
+		searchField.setTextFormatter(formatter);
 
 		// press enter
 		root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
