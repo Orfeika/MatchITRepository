@@ -74,7 +74,7 @@ public class BookReaderController extends Application {
 
 		// Creating hbBox and buttons
 
-		HBox hbox = new HBox(1);
+		HBox hbox = new HBox(2);
 		Button alphabetic = new Button("Alphabetic");
 		alphabetic.setOnAction((e) -> words.sort(new WordCountKeyComparator()));
 		Button frequency = new Button("Frequency");
@@ -89,18 +89,14 @@ public class BookReaderController extends Application {
 		// find and select word
 		find.setOnAction((action) -> {
 			String input = searchField.getText();
-			Boolean isFound = false;
 			for (Entry<String, Integer> word : words) {
 				if (word.getKey().equalsIgnoreCase(input)) {
 					listView.scrollTo(word);
 					listView.getSelectionModel().select(word);
-					isFound = true;
+					return;
 				}
-
 			}
-			if (!isFound) {
-				alert.showAndWait();
-			}
+			alert.showAndWait();
 
 		}
 
