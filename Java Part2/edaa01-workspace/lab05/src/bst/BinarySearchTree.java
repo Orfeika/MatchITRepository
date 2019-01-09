@@ -143,7 +143,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 		toArray(root, a, 0);
 		System.out.println(Arrays.toString(a));
 
-		root = buildTree(a, 0, size);
+		root = buildTree(a, 0, size-1);
 
 
 
@@ -173,7 +173,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 	 * array a are assumed to be in ascending order. Returns the root of tree.
 	 */
 	private BinaryNode<E> buildTree(E[] a, int first, int last) {
-		if(first>=last) {
+		if(first>last) {
 			return null;
 		} else {
 			
