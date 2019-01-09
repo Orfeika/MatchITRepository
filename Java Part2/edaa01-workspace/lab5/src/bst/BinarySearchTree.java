@@ -1,5 +1,7 @@
 package bst;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
 
 import bst.BinarySearchTree.BinaryNode;
@@ -137,9 +139,14 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 	 * Builds a complete tree from the elements in the tree.
 	 */
 	public void rebuild() {
-			/// How to create an array of generics?
-		
-		
+		E[] a = (E[]) new Comparable[size];
+		toArray(root, a, 0);
+		System.out.println(Arrays.toString(a));
+
+		root = buildTree(a, 0, size);
+
+
+
 	}
 
 	/*
@@ -149,15 +156,16 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 	 */
 	private int toArray(BinaryNode<E> node, E[] a, int index) {
 		if (node.left != null) {
-			toArray(node.left, a, index++);
+			index = toArray(node.left, a, index);
 		}
-		a[index] = node.element;
-		System.out.println("Index " + index + "value" + a[index]);
+		a[index++] = node.element;
+		// System.out.println("Index " + index + "value" + a[index]);
+
 		if (node.right != null) {
-			toArray(node.right, a, index++);
+			index = toArray(node.right, a, index);
 		}
 
-		return index + 1;
+		return index;
 	}
 
 	/*
@@ -165,16 +173,17 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 	 * array a are assumed to be in ascending order. Returns the root of tree.
 	 */
 	private BinaryNode<E> buildTree(E[] a, int first, int last) {
-		int middle = (first + last) / 2;
-		
-		if (middle>=first) {
-			BinaryNode<E> root = new BinaryNode<E>(a[middle]);
-			root.left = buildTree(a,middle-1, first);
-
+		if(first>=last) {
+			return null;
+		} else {
+			
 		}
+		int middle = (first + last) / 2;
+		BinaryNode<E> root = new BinaryNode<E>(a[middle]);
+		root.left = buildTree(a, first, middle - 1);
+		root.right = buildTree(a, middle + 1, last);
 
-		BinaryNode<E> root = new BinaryNode<E>(a[middle + 1]);
-		return root.right = buildTree(a, middle + 1, last);
+		return root;
 
 	}
 
@@ -188,25 +197,39 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 		}
 	}
 
-//	public static void main(String [] args) {
-//		BSTVisualizer bstv = new BSTVisualizer(" ", 700, 700);
-//		///How we can sort tree? pg31  https://fileadmin.cs.lth.se/cs/Education/MatchIT/Prog_ADV/AP_Lecture10.pdf 
-//		
-//		BinarySearchTree<Student> bst = new BinarySearchTree<Student>((st1,st2) -> st1.getName().compareTo(st2.getName()));
-//		bst.add(new Student("Mark",10,"Math"));
-//		bst.add(new Student("Peter", 5, "Literature"));
-//		bst.add(new Student("Johan", 8, "Chemistry"));
-//		bst.add(new Student("Marry", 3, "Literature"));
-//		bst.add(new Student("Tom",1,"Architecture"));
-//		bst.add(new Student("Sandy",4, "Art"));
-//		bst.add(new Student("Ann",12,"Architecture"));
-//		bst.add(new Student("Zed",11, "Art"));
-//		bst.add(new Student("Rick",14, "Chemistry"));
-//		bst.add(new Student("Yuki",14, "Art"));
-//		bst.printTree();
-//		bstv.drawTree(bst);
-//		
-//		
-//	}
+	public static void main(String[] args) {
+		 BSTVisualizer bstv = new BSTVisualizer(" ", 700, 700);
+		/// How we can sort tree? pg31
+		/// https://fileadmin.cs.lth.se/cs/Education/MatchIT/Prog_ADV/AP_Lecture10.pdf
+
+		BinarySearchTree<Student> bst = new BinarySearchTree<Student>((st1,st2) -> st1.getName().compareTo(st2.getName()));
+		bst.add(new Student("Mark",10,"Math"));
+		bst.add(new Student("Peter", 5, "Literature"));
+		bst.add(new Student("Johan", 8, "Chemistry"));
+		bst.add(new Student("Marry", 3, "Literature"));
+		bst.add(new Student("Tom",1,"Architecture"));
+		bst.add(new Student("Sandy",4, "Art"));
+		bst.add(new Student("Ann",12,"Architecture"));
+		bst.add(new Student("Zed",11, "Art"));
+		bst.add(new Student("Rick",14, "Chemistry"));
+		bst.add(new Student("Yuki",14, "Art"));
+
+		BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
+		bst.add(10);
+		bst.add(5);
+		bst.add(8);
+		bst.add(3);
+		bst.add(1);
+		bst.add(4);
+		bst.add(12);
+		bst.add(11);
+		bst.add(14);
+		bst.add(17);
+		bst.add(20);
+		// bstv.drawTree(bst);
+		bst.rebuild();
+		 bstv.drawTree(bst);
+
+	}
 
 }

@@ -2,6 +2,8 @@ package mountain;
 
 import java.util.HashMap;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import fractal.Fractal;
 import fractal.TurtleGraphics;
 
@@ -36,9 +38,8 @@ public class Mountain extends Fractal {
 	@Override
 	public void draw(TurtleGraphics turtle) {
 
-
 		// mountainTriangle(turtle,order, b, c, a);
-		mointainShiftedTriangel(turtle, order, b, c, a);
+		mointainShiftedTriangel(turtle, order, b, c, a, dev);
 	}
 
 	private void mountainTriangle(TurtleGraphics turtle, int order, Point a, Point b, Point c) {
@@ -59,24 +60,24 @@ public class Mountain extends Fractal {
 		}
 	}
 
-	private void mointainShiftedTriangel(TurtleGraphics turtle, int order, Point a, Point b, Point c) {
+	private void mointainShiftedTriangel(TurtleGraphics turtle, int order, Point a, Point b, Point c, double dev) {
 		if (order == 0) {
-			turtle.moveTo(a.getX(),a.getY());
+			turtle.moveTo(a.getX(), a.getY());
 			turtle.forwardTo(b.getX(), b.getY());
 			turtle.forwardTo(c.getX(), c.getY());
 			turtle.forwardTo(a.getX(), a.getY());
 
 		} else {
-			Side ab = new Side(a,b);
+			Side ab = new Side(a, b);
 			Side bc = new Side(b, c);
 			Side ca = new Side(c, a);
-			Point mAB = isMiddlePoinExist(ab);
-			Point mBC = isMiddlePoinExist(bc);
-			Point mCA = isMiddlePoinExist(ca);
-			mointainShiftedTriangel(turtle, order - 1, b, mBC, mAB);
-			mointainShiftedTriangel(turtle, order - 1, mAB, a, mCA);
-			mointainShiftedTriangel(turtle, order - 1, mCA, c, mBC);
-			mointainShiftedTriangel(turtle, order - 1, mCA, mAB, mBC);
+			Point mAB = isMiddlePoinExist(ab, dev);
+			Point mBC = isMiddlePoinExist(bc, dev);
+			Point mCA = isMiddlePoinExist(ca, dev);
+			mointainShiftedTriangel(turtle, order - 1, b, mBC, mAB, dev / 2);
+			mointainShiftedTriangel(turtle, order - 1, mAB, a, mCA, dev / 2);
+			mointainShiftedTriangel(turtle, order - 1, mCA, c, mBC, dev / 2);
+			mointainShiftedTriangel(turtle, order - 1, mCA, mAB, mBC, dev / 2);
 
 		}
 
@@ -90,35 +91,26 @@ public class Mountain extends Fractal {
 
 	}
 
-
-
-	private Point isMiddlePoinExist(Side ab) {
-		if(triangle.containsValue(ab.getStarPoint()) && triangle.containsValue(ab.getEndPoint())){
-		triangle.put(ab, middlePoint(ab));
+	private Point isMiddlePoinExist(Side ab, double dev) {
+		if (triangle.containsKey(ab)) {
+			return triangle.remove(ab);
+		} else {
+			triangle.put(ab, shiftedMiddlePoint(ab, dev));
 		}
-		
-		if (!triangle.containsKey(ab))
-		{
-			triangle.put(ab, shiftedMiddlePoint(ab));
-		}
-		
-
 
 		return triangle.get(ab);
 	}
-	
-	
-	private Point shiftedMiddlePoint(Side side) {
+
+	private Point shiftedMiddlePoint(Side side, double dev) {
 		double y = side.getMidPoint().getY() + RandomUtilities.randFunc(dev);
 		Point p = new Point(side.getMidPoint().getX(), (int) y);
 		System.out.println("X:" + p.getX() + "Y:" + p.getY());
 
 		return p;
 	}
-	
-	
+
 	private Point middlePoint(Side side) {
-		Point p = new Point(side.getMidPoint().getX(), side.getMidPoint().getY() );
+		Point p = new Point(side.getMidPoint().getX(), side.getMidPoint().getY());
 
 		return p;
 	}

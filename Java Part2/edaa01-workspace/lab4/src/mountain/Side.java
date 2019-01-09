@@ -36,12 +36,6 @@ public class Side {
 	@Override
 	public boolean equals(Object obj) {
 
-		if (obj == null) {
-			return false;
-		}
-		if (this == obj) {
-			return true;
-		}
 
 		if (!(obj instanceof Side)) {
 			return false;
@@ -49,7 +43,9 @@ public class Side {
 
 		Side otherSide = (Side) obj;
 		return otherSide.endPoint.equals(this.endPoint) && 
-				otherSide.starPoint.equals(this.starPoint);
+				otherSide.starPoint.equals(this.starPoint) || 
+				otherSide.endPoint.equals(this.starPoint) && 
+				otherSide.starPoint.equals(this.endPoint) ;
 
 	}
 

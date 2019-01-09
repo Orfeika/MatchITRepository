@@ -46,9 +46,9 @@ public class FractalApplication extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		fractals = new Fractal[1];
-		//fractals[0] = new Koch(300);	
-		fractals[0] = new Mountain(new Point(100,300) , new Point(300, 100), new Point(500, 300),20);
+		fractals = new Fractal[2];
+		fractals[1] = new Koch(300);	
+		fractals[0] = new Mountain(new Point(100,300) , new Point(600, 100), new Point(700, 800),20);
 		actFractal = fractals[0];
 		BorderPane root = new BorderPane();
 		root.setBottom(addButtonBox());
@@ -158,7 +158,7 @@ public class FractalApplication extends Application {
 					}
 				});
 				} catch (ThreadDeath e) { // do nothing
-//					System.out.println("beräkningen avbruten");
+//					System.out.println("berï¿½kningen avbruten");
 				} catch(Throwable e){
 //					System.err.println(e.getMessage());
 					e.printStackTrace(System.err);
