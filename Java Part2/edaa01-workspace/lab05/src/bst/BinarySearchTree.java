@@ -202,17 +202,17 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 		/// How we can sort tree? pg31
 		/// https://fileadmin.cs.lth.se/cs/Education/MatchIT/Prog_ADV/AP_Lecture10.pdf
 
-		BinarySearchTree<Student> bst = new BinarySearchTree<Student>((st1,st2) -> st1.getName().compareTo(st2.getName()));
-		bst.add(new Student("Mark",10,"Math"));
-		bst.add(new Student("Peter", 5, "Literature"));
-		bst.add(new Student("Johan", 8, "Chemistry"));
-		bst.add(new Student("Marry", 3, "Literature"));
-		bst.add(new Student("Tom",1,"Architecture"));
-		bst.add(new Student("Sandy",4, "Art"));
-		bst.add(new Student("Ann",12,"Architecture"));
-		bst.add(new Student("Zed",11, "Art"));
-		bst.add(new Student("Rick",14, "Chemistry"));
-		bst.add(new Student("Yuki",14, "Art"));
+//		BinarySearchTree<Student> bst = new BinarySearchTree<Student>((st1,st2) -> st1.getName().compareTo(st2.getName()));
+//		bst.add(new Student("Mark",10,"Math"));
+//		bst.add(new Student("Peter", 5, "Literature"));
+//		bst.add(new Student("Johan", 8, "Chemistry"));
+//		bst.add(new Student("Marry", 3, "Literature"));
+//		bst.add(new Student("Tom",1,"Architecture"));
+//		bst.add(new Student("Sandy",4, "Art"));
+//		bst.add(new Student("Ann",12,"Architecture"));
+//		bst.add(new Student("Zed",11, "Art"));
+//		bst.add(new Student("Rick",14, "Chemistry"));
+//		bst.add(new Student("Yuki",14, "Art"));
 
 		BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
 		bst.add(10);
@@ -226,7 +226,6 @@ public class BinarySearchTree<E extends Comparable<? super E>> {
 		bst.add(14);
 		bst.add(17);
 		bst.add(20);
-		// bstv.drawTree(bst);
 		bst.rebuild();
 		 bstv.drawTree(bst);
 

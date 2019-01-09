@@ -1,3 +1,4 @@
+package bst;
 import bst.Person;
 
 public class Student extends Person{
