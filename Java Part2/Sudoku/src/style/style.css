@@ -1,0 +1,41 @@
+.root{
+	-fx-padding: 10 10 10 10;
+    -fx-font-family: "Comic Sans MS, cursive, sans-serif";
+	-fx-font-size:	20;
+	-fx-font-style: normal ;
+	-fx-font-weight: normal ;
+    -fx-alignmen : baseline-center;
+    
+    
+}
+
+
+#tiles {
+	-fx-alignment : bottom-center ;
+	-fx-tile-alignment: bottom-center ;
+	-fx-pref-rows: 9;	 
+	-fx-pref-columns: 9;
+	-fx-hgap: 2;
+	-fx-vgap: 2;
+}
+
+#flow {
+	-fx-hgap: 10;
+	-fx-vgap: 10;
+	-fx-padding: 10 10 10 10;
+	-fx-column-halignment:  center;
+	-fx-alignment : bottom-center; 
+}
+.text-field {
+    -fx-min-width: 40;
+    -fx-min-height: 40;
+    -fx-max-width: 40;
+    -fx-max-height: 40;
+    -fx-font-weight: bold ;
+    
+
+}
+
+
+
+
