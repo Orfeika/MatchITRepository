@@ -1,8 +1,6 @@
 package gui;
 
 import javafx.application.Application;
-
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -16,6 +14,7 @@ import javafx.stage.Stage;
 import sudoku.Sudoku;
 
 public class SudokuSceneBilder extends Application {
+	private static final int BOARD_SIZE = 9;
 	Scene scene;
 	final int SIZE = 40;
 
@@ -78,7 +77,7 @@ public class SudokuSceneBilder extends Application {
 
 		Button clearButton = new Button("Clear all");
 		clearButton.setOnAction((event) -> {
-			for (int i = 0; i < 81; i++) {
+			for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
 				((TextField) tiles.getChildren().get(i)).setText("");
 			}
 		});

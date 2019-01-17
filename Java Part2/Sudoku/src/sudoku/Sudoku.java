@@ -46,10 +46,11 @@ public class Sudoku {
 		return false;
 	}
 
+
 	/**
 	 * @param number value from 1 to 9 to check
 	 * @param boxId  index of the box
-	 * @param row index of row where to check
+	 * @param row    index of row where to check
 	 * @return true if number exist in row
 	 */
 	public boolean isNumberExistInRow(int number, int boxId, int row) {
@@ -69,7 +70,7 @@ public class Sudoku {
 
 	/**
 	 * @param number value from 1 to 9 to check
-	 * @param boxID index of the box
+	 * @param boxID  index of the box
 	 * @param column index of column where to check
 	 * @return true if number exist in column
 	 */
@@ -89,13 +90,33 @@ public class Sudoku {
 
 	public boolean isSafe(int boxId, int position, int number) {
 
-		return !isNumberExistInBox(number, boxId)
-				&& !isNumberExistInColumn(number, boxId, position)
+		return !isNumberExistInBox(number, boxId) && !isNumberExistInColumn(number, boxId, position)
 				&& !isNumberExistInRow(number, boxId, position);
 
 	}
 
+	private boolean checkInput() {
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0; j < data[i].length; j++) {
+				if (data[i][j] == 0) {
+					continue;
+				}
+				int temp = data[i][j];
+				data[i][j] =0;
+				if(!isSafe(i, j, temp)) {
+					data[i][j] =temp;
+					return false; 
+				}
+				data[i][j] = temp;
+			}
+		}
+		return true;
+	}
+
 	public boolean resolve() {
+		if (checkInput() == false) {
+			return false;
+		}
 		return solve(new Position(0, 0));
 
 	}
