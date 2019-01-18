@@ -12,9 +12,6 @@ public class Sudoku2 {
 
 	}
 
-	public Sudoku2(int[][] sudokuField) {
-		this.sudokuField = sudokuField;
-	}
 
 	private boolean isNumberExistInRow(int number, int x) {
 		for (int i = 0; i < FIELD_SIZE; i++) {
@@ -113,9 +110,6 @@ public class Sudoku2 {
 
 	}
 
-	public int[][] getSudokuField() {
-		return sudokuField;
-	}
 	public int getField(int x, int y) {
 		return sudokuField[x][y];
 	}
